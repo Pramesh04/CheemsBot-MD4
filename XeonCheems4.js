@@ -262,7 +262,25 @@ const Autoreply = m.isGroup ? autorep.includes(from) : true
         const isBan = banUser.includes(m.sender)
         const isBanChat = m.isGroup ? banchat.includes(from) : false
 autoreadsw = true
-	    
+//react✅
+PRAMESH.sendMessage(m.chat, {
+          react: {
+           text: `${pickRandom(['💚','❤️','🦁','🦁','🦁','💖','😒','🙄','😆','💖','😊','😊','😒','😆','😆'])}`,
+            key: m.key,
+          }})
+          //love❤️😊
+const solot = [
+		'☺️❤️*100/*❤️🤭☺️',
+		'😊💚*75/*💚😊',
+		'😐💛*50/*💛😐',
+		'😔💔*35/*💔😔',
+		'😭💔*0/*💔😱😭',
+		'😖🥺💔*ඒකි /ඒකා උබට බොරුවක් කරන්නෙ බන්*💔😖🥺'
+		]
+		//
+const kruthima = ['inbox ඒම තහනම් කර ඇත\n\n\n☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒','මම කෘතිම බුද්දියකින් ක්‍රියාකරන රොබෝ වරයෙකි😊💖','මට තේරෙන විදිහට ඔබට පිස්සු🙄😒','https://chat.whatsapp.com/FDpARRbNUKjLkfbm2xRv2M \n\n\n☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒','මොකද වෙලාතියෙන්නෙ😒😁','මට මැසේජ් කරාට මම මනුස්සයෙක්නම් නෙමෙයි😆','හරි හරි මට තේරුනා ඔයාට පිස්සු','ආස නෑ මන් ඕවට','හා','එල🥲👍','මම කෘතිම බුදියකින් වැඩකරන රොබෝ වරයෙකි👍'] 
+const kruthi = kruthima[Math.floor(Math.random() * kruthima.length)]
+if (!m.isGroup) return replay(`*${kruthi}*`)	    
         //member\\
         let picaks = [flaming,fluming,flarun,flasmurf]
 		let picak = picaks[Math.floor(Math.random() * picaks.length)]
@@ -1302,110 +1320,138 @@ https://chat.whatsapp.com/FDpARRbNUKjLkfbm2xRv2M
     PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
     }
             break
+case 'vd': case 'serchsong' { 
+PRAMESH.sendMessage(from, { react: { text: `🔎`, key: m.key }})
+if (!text) return m.reply(`Example : ${prefix + command} Stay jb`)
+            let ytsvideo = require("youtube-yts")
+            let videosearch = await ytsvideo(text)
+            listSerch = []
+            teskd = `\nSearched Video: ${text}\n`
+            for (let i of videosearch.all) {
+                listSerch.push({
+                    title: i.title,
+                    rowId: `${prefix}ytmp4 ${i.url}`,
+                    description: `Duration: ${i.timestamp}`=
+                })
+            }
+            let sections = [
+                {
+                    title: "Top " + videosearch.all.length + " videos thats matches search result",
+                    rows: listSerch
+                }
+            ]
+            const listMessage = {
+                text: teskd,
+                footer: botname,
+                title: ``,
+                buttonText: "Videos",
+                mentions: parseMention(teskd), sections
+            }
+            return PRAMESH.sendMessage(m.chat, listMessage, {
+                quoted: m
+            })
+            }
+        break    
+        case 'sg': case 'serchsong': {
+PRAMESH.sendMessage(from, { react: { text: `🔎`, key: m.key }})
+        if (!text) return m.reply(`Example : ${prefix + command} stay jb`)
+            let ytslagu = require("youtube-yts")
+            let lagusearch = await ytslagu(text)
+            listSerch = []
+            teskd = `Searched Song: ${text}\n`
+            for (let i of lagusearch.all) {
+                listSerch.push({
+                    title: i.title,
+                    rowId: `${prefix}ytmp3 ${i.url}`,
+                    description: `Duration: ${i.timestamp}`
+                })
+            }
+            const sections = [
+                {
+                    title: "Top " + lagusearch.all.length + " songs that matched search result",
+                    rows: listSerch
+                }
+            ]
+            const listMessage = {
+                text: teskd,
+                footer: botname,
+                title: ``,
+                buttonText: "Songs",
+                mentions: parseMention(teskd), sections
+            }
+            return PRAMESH.sendMessage(m.chat, listMessage, {
+                quoted: m
+            })
+            }
+            break
 case 'song': case 'yt': case 'play': {
- if (isBan) return reply(mess.ban)
-	if (isBanChat) return reply(mess.banChat)
-//if (isLimit(m.sender, isPremium, isCreator, limitCount, limit)) return m.reply(mess.endLimit)
-PRAMESH.sendMessage(from, { react: { text: `🎧`, key: m.key }})
-                if (!text) throw `Example : ${prefix + command} story wa anime`
-                let yts = require("yt-search")
-                let search = await yts(text)
-                let anu = search.videos[0] 
-                let buf = await getBuffer(anu.thumbnail)
-                let caption = `
-*| ☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒ |*
-◈━━━━━━━━━━━━━━━◈            
-╒════════════════
-┝ 📝 Title : ${anu.title}
-┝ 🔍 Ext : Search
-┝ 🔗 ID : ${anu.videoId}
-┝ ⏰ Duration : ${anu.timestamp}
-┝ 🌝 Viewers : ${anu.views}
-┝ ⏳ Uploaded : ${anu.ago}
-┝ 🔮 Author : ${anu.author.name}
-┝ 🌐 Channel : ${anu.author.url}
-┝ ⛓️ Description : ${anu.description}
-┝ ✏️ Url : ${anu.url}
-┕────────────
-`
-message = await prepareWAMessageMedia({ image : { url: anu.thumbnail } }, { upload:   PRAMESH.waUploadToServer })
-const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            hydratedContentText: caption,
-                            imageMessage: message.imageMessage,
-                            hydratedFooterText: `${botname}`,
-                            hydratedButtons: [{
-          urlButton: {
-                  displayText: '🎸YOUTUBE CHANEL🎸',
-                  url: `https://youtube.com/channel/UCOlt2_XK6tS2KJn6fTdpPew`
-          }
-                            }, {
-                            	urlButton: {
-          displayText: `🪀SUPPORT GROUP🪀`, 
-                  url: `https://chat.whatsapp.com/FDpARRbNUKjLkfbm2xRv2M`
-          }
-                            }, {
-          quickReplyButton: {
-                  displayText: `༺🎬𝐕𝐈𝐃𝐄𝐎🎬༻`,
-                  id: `${prefix}video ${anu.url}`
-          }
-          }, {
-          quickReplyButton: {
-                  displayText: `༺🎶𝐃𝐎𝐂𝐔𝐌𝐄𝐍𝐓🎶༻`,
-                  id: `${prefix}ytdoc ${anu.url}`
-          }
-           },{
-          quickReplyButton: {
-                  displayText: `༺🎶𝐒𝐎𝐍𝐆🎶༻`,
-                  id: `${prefix}ytmp3 ${anu.url}`
-          }
-           }]
-                        }
-                    }
-                
-                }), { userJid: m.chat })
-                PRAMESH.relayMessage(m.chat, template.message, { messageId: template.key.id })
-}
-break
+         if (!text) return reply(`Example : ${prefix + command} lelena`)
+ let yts = require("yt-search")
+ let search = await yts(text)
+ let anulay = search.videos[0]
+ let buttons = [
+    {buttonId: `pnpn ${anulay.url}`, buttonText: {displayText: '⬇️𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳⬇️'}, type: 1},
+    {buttonId: `sg ${text}`, buttonText: {displayText: '🔎𝚂𝙴𝙻𝙴𝙲𝚃_ˢᵃᵐᵉ𝚂𝙾𝙽𝙶🔎'}, type: 1},
+    {buttonId: `rateus`, buttonText: {displayText: '✡️𝐑𝐀𝐓𝐄_𝐔𝐒✡️'}, type: 1}
+    ]
+                let buttonMessage = {
+                    image: { url: anulay.thumbnail },
+                    caption: `
+┏━━━━━━━━━━━━━꧂
+┃*☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒*┃
+┃◈━━━━━━━━━━━━◈
+┃  📥SONG DOWNLOADER📥
+┃      ◈━━━━━━━◈
+┃🎬Title : ${anulay.title}
+┃⏳Duration : ${anulay.timestamp}
+┃👁️‍🗨️Viewers : ${anulay.views}
+┃⏰Upload At : ${anulay.ago}
+┃🔮Author : ${anulay.author.name}
+┃🎀Channel : ${anulay.author.url}
+┃🔗Url : ${anulay.url}
+┗━━━━━━━━━━━━━꧂`,
+                    footer: botname,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+ break
 case 'video': { 
     PRAMESH.sendMessage(from, { react: { text: `📽️`, key: m.key }})    
         if (!text) return reply(`Example : ${prefix + command} lelena`)
  let yts = require("yt-search")
  let search = await yts(text)
- let anu = search.videos[0]
+ let anulay = search.videos[0]
  let buttons = [
- {buttonId: `ytmp4 ${anu.url} 360p`, buttonText: {displayText: '⚡360p⚡'}, type: 1},
- {buttonId: `ytmp4 ${anu.url} 480p`, buttonText: {displayText: '⚡480p⚡'}, type: 1},
- {buttonId: `ytmp4 ${anu.url} 720p`, buttonText: {displayText: '⚡720p⚡'}, type: 1}
- ]
- let buttonMessage = {
- image: { url: anu.thumbnail },
- caption: `*║☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒☬║*
-     
-   📥 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍𝐋𝐎𝐃𝐄𝐑
- 
-*┃🎬Title :* ${anu.title} 
- 
-*┃🎲Duration :* ${anu.timestamp} 
- 
-*┃🌐Author :* ${anu.author.name} 
- 
-*┃📃Url :* ${anu.url} 
-
-*┃🔖Runtime :* ${runtime(process.uptime())}
- 
-*┃BOT NAME :* *☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒*
-
-┗━━━━━━━━━❊`,
- footer: `☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒`,
- buttons: buttons,
- headerType: 4,
- }
- PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
- }
- break
-                            case 'ytmp3': {	 
+    {buttonId: `ytmp4 ${anulay.url}`, buttonText: {displayText: '⬇️𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳⬇️'}, type: 1},
+    {buttonId: `vd ${text}`, buttonText: {displayText: '🔎𝚂𝙴𝙻𝙴𝙲𝚃_ˢᵃᵐᵉ𝚅𝙸𝙳𝙴𝙾🔎'}, type: 1},
+    {buttonId: `rateus`, buttonText: {displayText: '✡️𝐑𝐀𝐓𝐄_𝐔𝐒✡️'}, type: 1}
+    ]
+                let buttonMessage = {
+                    image: { url: anulay.thumbnail },
+                    caption: `
+┏━━━━━━━━━━━━━꧂
+┃*☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒*┃
+┃◈━━━━━━━━━━━━◈
+┃  📥VIDEO DOWNLOADER📥
+┃      ◈━━━━━━━◈
+┃🎬Title : ${anulay.title}
+┃⏳Duration : ${anulay.timestamp}
+┃👁️‍🗨️Viewers : ${anulay.views}
+┃⏰Upload At : ${anulay.ago}
+┃🔮Author : ${anulay.author.name}
+┃🎀Channel : ${anulay.author.url}
+┃🔗Url : ${anulay.url}
+┗━━━━━━━━━━━━━꧂`,
+                    footer: botname,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+break
+case 'pnpn': {
 PRAMESH.sendMessage(from, { react: { text: `🎶`, key: m.key }})   
                      let { yta } = require('./lib/y2mate')
                      if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
@@ -1414,29 +1460,130 @@ PRAMESH.sendMessage(from, { react: { text: `🎶`, key: m.key }})
                      let media = await yta(text, quality)
                      if (media.filesize >= 999999) return reply('*File Over Limit* '+util.format(media))                
                      buf = await getBuffer(media.thumb) 
-                     const auddown = await PRAMESH.sendMessage(from , { text: '📥 Downloading Your Song...' }, { quoted: m } )
+                     const auddown = await PRAMESH.sendMessage(from , { text: '📥 Downloading Your audio✅...' }, { quoted: m } )
                      await PRAMESH.sendMessage(from, { delete: auddown.key })
-                     const audup = await PRAMESH.sendMessage(from , { text: '📤 Uploading Your Song...' }, { quoted: m } )
+                     const audup = await PRAMESH.sendMessage(from , { text: '📤 Uploading Your audio✅...' }, { quoted: m } )
                      const aud = await PRAMESH.sendMessage(m.chat, {audio:{url:media.dl_link}, mimetype:"audio/mpeg", fileName: `${media.title}.mp3`}, { quoted: m }) .catch((err) => reply(mess.error))
-                     await PRAMESH.sendMessage(from, { delete: audup.key })               
+                     await PRAMESH.sendMessage(from, { delete: audup.key })
+     const auddown = await PRAMESH.sendMessage(from , { text: '📥 Downloading Your document✅...' }, { quoted: m } )
+    await PRAMESH.sendMessage(from, { delete: auddown.key })
+    const audup = await PRAMESH.sendMessage(from , { text: '📤 Uploading Your document✅...' }, { quoted: m } )
+    const aud = await PRAMESH.sendMessage(m.chat, {document:{url:media.dl_link}, mimetype:"audio/mpeg", fileName: `${media.title}.mp3`}, { quoted: m }) .catch((err) => reply(mess.error))
+    await PRAMESH.sendMessage(from, { delete: audup.key })              
                      }
                  break
-case 'ytdoc': {	    
-PRAMESH.sendMessage(from, { react: { text: `📂`, key: m.key }})
-    let { yta } = require('./lib/y2mate')
-    if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
-    if (!isUrl(args[0]) && !args[0].includes('youtube.com')) return reply(`The link you provided is invalid`)
-    let quality = args[1] ? args[1] : '128kbps'
-    let media = await yta(text, quality)
-    if (media.filesize >= 999999) return reply('*File Over Limit* '+util.format(media))                
-    buf = await getBuffer(media.thumb) 
-    const auddown = await PRAMESH.sendMessage(from , { text: '📥 Downloading Your Song...' }, { quoted: m } )
-    await PRAMESH.sendMessage(from, { delete: auddown.key })
-    const audup = await PRAMESH.sendMessage(from , { text: '📤 Uploading Your Song...' }, { quoted: m } )
-    const aud = await PRAMESH.sendMessage(m.chat, {document:{url:media.dl_link}, mimetype:"audio/mpeg", fileName: `${media.title}.mp3`}, { quoted: m }) .catch((err) => reply(mess.error))
-    await PRAMESH.sendMessage(from, { delete: audup.key })               
-    }
-break
+  case 'love': {
+            const somtoy = solot[Math.floor(Math.random() * solot.length)]
+            let sloth =`*හායි*\n *ඔයාගෙ girlfriend ඔයාට කොච්චර ආදරෙයිද කියල බලමුද*`
+           let buttons = [{ buttonId: 'slot', buttonText: { displayText: '💔නැවත බැලීම💔' }, type: 1 }]
+            await PRAMESH.sendButtonText(m.chat, buttons, sloth, botname, m)
+            }
+            break
+  //chat bot\\
+            case 'ba': case 'බැ': case 'බෑ': case 'බැහැ': {
+PRAMESH.sendMessage(from, { react: { text: `😒`, key: m.key }})
+                PRAMESH.sendMessage(from, { text: `*බැරි නම් නිකං ඉන්න😏*` }, { quoted: m })
+            }
+            break
+            case 'whoththo': case 'හුත්තෝ': case 'පකය': case 'pakaya': case 'කැරියා': case 'කැම්රි': case 'කැම්රියා': case 'kamriya': case 'humtha': case 'හුත්ති': case 'හුම්ත': case 'හුම්ති': case 'පම්ක': case 'වේසි': case 'වේම්සි': case 'ඇට දෙක': case 'hutti': case 'kari': case 'besikaya': case 'බේසික': case 'පකය': case 'pamka': case 'පොයන්නා': case 'පොන්නයා': case 'පින්නයා': case 'pinnaya': case 'wesi': case 'බඩුව': case 'baduwa': case 'ukkapan': case 'උක්': case 'පයිය': case 'පුක': case 'puka': case 'pumka': {
+                PRAMESH.sendMessage(from, { text: `*කුනුහරුප කියන්න එපා පගෝ😑💔*` }, { quoted: m })
+            }
+            break
+            case 'pramesh': case 'ප්‍රමේෂ්': case 'premesh': case 'ප්‍රමයෝ': case '🦁': {
+            PRAMESH.sendMessage(from, { react: { text: `💝`, key: m.key }})
+                PRAMESH.sendMessage(from, { text: `*ඕ කියම්න🌝\n ඇයි කතා කරේ*` }, { quoted: m })
+            }
+            break
+            case 'ado': case 'අඩෝ':{
+                PRAMESH.sendMessage(from, { text: `*මොකෝ ඩෝ🌚*` }, { quoted: m })
+            }
+            break
+            case 'moko': case 'මොකෝ':{
+                PRAMESH.sendMessage(from, { text: `*ඇයි ඇයි මොකෝ😎*` }, { quoted: m })
+            }
+            break
+            case 'bllo': case 'bamla': case 'බල්ලො': case 'බල්ලා': case 'බම්ලො': case 'බම්ලා': {
+                PRAMESH.sendMessage(from, { text: `*එන්නෙපා බල්ල ගාගෙන😒💔💔*` }, { quoted: m })
+            }
+            break
+            case 'kolukaraya': case 'කොලුකාරයා':{
+                PRAMESH.sendMessage(from, { text: `*ඇයි මේ අපහාස😒*` }, { quoted: m })
+            }
+            break
+            case 'haminenawane': case 'හැමිනෙනවනෙ':{
+                PRAMESH.sendMessage(from, { text: `*අනේ පලහ්😂*` }, { quoted: m })
+            }
+            break
+            case 'e': case 'ee': case 'ඒ':{
+                PRAMESH.sendMessage(from, { text: `*මොකෝ🌚*` }, { quoted: m })
+            }
+            break
+            case 'ow': case 'ඔව්': case 'ඕ': case 'oo':{
+                PRAMESH.sendMessage(from, { text: `*එහෙනම් එච්චරයි🤭*` }, { quoted: m })
+            }
+            break
+            case 'halo': case 'hello': case 'haloo': case 'හලො': case 'හලෝ': case 'හලූ':{
+                PRAMESH.sendMessage(from, { text: `*🌝මොකෝ හලෝ🤭*` }, { quoted: m })
+            }
+            break
+            case 'danna': case 'danne na': case 'දන්නෑ': case 'දන්නෙ නෑ':{
+                PRAMESH.sendMessage(from, { text: `*මං දන්නෙත් නෑ☹️*` }, { quoted: m })
+            }
+            break
+            case 'ko': case 'koo': case 'කෝ': case 'කො':{
+                PRAMESH.sendMessage(from, { text: `*මං දන්නෙත් නෑ☹️*` }, { quoted: m })
+            }
+            break
+            case 'kamak': case 'kamanna': case 'කමක්': case 'කමන්නෑ':{
+                PRAMESH.sendMessage(from, { text: `*ආ කමක් නෑ...😂👍*` }, { quoted: m })
+            }
+            break
+            case 'balamu': case 'balanna': case 'බලමු': case 'බලන්න':{
+                PRAMESH.sendMessage(from, { text: `*බලමුකෝ😂👍*` }, { quoted: m })
+            }
+            break
+            case 'pala': case 'palayan': case 'පල': case 'පලහ්': case 'පලයන්': case 'පලකො':{
+                PRAMESH.sendMessage(from, { text: `*හා උබ කියනකන් හිටියෙ😒💔*` }, { quoted: m })
+            }
+            break
+            case 'aththada': case 'ඇත්තද': case 'සිරාද': case 'ඇත්තෙයි': case 'අම්මපා': case 'ඇත්ත':{
+                PRAMESH.sendMessage(from, { text: `*මං දන්නෑ😒*` }, { quoted: m })
+            }
+            break
+            case 'gm': case 'goodmorning': case 'gummoninm': case 'ගුඩ්මෝනිං': case 'ගුම්මෝනිං': case 'ගුඩ්මෝනිං😌': case 'ගුම්මෝනිං❤️': case 'ගුඩ්මෝනිම්':{
+                PRAMESH.sendMessage(from, { text: `*🎤දහසක් මල්🌸 විකසිත වන😊 මේ හිමිදිරි උදෑසනේ🌄 පතන්නම් ඔබ සැමට🙏 සුභම සුභ උදෑසනක් කියා...😃*` }, { quoted: m })
+            }
+            break
+            case 'gn': case 'goodnight': case 'gumnight': case 'ගුඩ්නයිට්': case 'ගුම්නයිත්': case 'ගුඩ්නයිට්😌': case 'ගුම්නයිට්❤️': case 'ගුඩ්නයිට්🌚❤️':{
+                PRAMESH.sendMessage(from, { text: `*ලබන්නාවූ රාත්‍රිය😌 හීනෙන් හොල්මන් පෙනෙන, මහ රෑ දාඩියෙන් තෙමී ඇහැරෙන, පෙරේතයන් ඇද යටට එන, කුම්භාණ්ඩයින් ජනෙල් වලින් එබී බලන, භයානක රාත්‍රියක් වේවා☠️👻👻*` }, { quoted: m })
+            }
+            break
+            case '🥰': case '😗': case '😙': case '😘😘': case '😘': case '😍': case 'umma': case '💗': case 'i love you': {
+                PRAMESH.sendMessage(from, { text: `*😘අයි ලව් යූ💗උම්මාහ්🥰🥰🤓*` }, { quoted: m })
+            }
+            break
+            case 'බොටා_වැලක්_බලමුද?':{
+                PRAMESH.sendMessage(from, { text: `ම්ම්ම්...බලමු😋\nhttps://www.pornhub.com/view_video.php?viewkey=ph61acfce1cf358\nhttps://www.pornhub.com/view_video.php?viewkey=ph61a3626db0be3\nhttps://www.pornhub.com/view_video.php?viewkey=ph61572e2818e7c\nhttps://www.pornhub.com/view_video.php?viewkey=ph615b0d4e909d1` }, { quoted: m })
+            }
+            break
+            case 'na': case 'naa': case 'නැ': case 'නෑ': case 'නෑනෙ': case 'nane': case 'naha': case 'නැතෝ':{
+                PRAMESH.sendMessage(from, { text: `*හේ හේ, නැද්ද☹️*` }, { quoted: m })
+            }
+            break
+            case '❤️': {
+PRAMESH.sendMessage(from, { react: { text: `❤️`, key: m.key }})
+                PRAMESH.sendMessage(from, { text: `❤️` }, { quoted: m })
+            }
+            break
+            case 'kiyahanko': case 'kiyapanko': case 'කියහන්කො': {
+                PRAMESH.sendMessage(from, { text: `*මොකද්ද😒*` }, { quoted: m })
+            }
+            break
+            case 'notes': {
+PRAMESH.sendMessage(from, { react: { text: `❤️`, key: m.key }})
+                PRAMESH.sendMessage(from, { text: `බන් විභහගෙ ඉවර වෙලා සේරම 𝐜𝐨𝐦𝐦𝐚𝐧𝐝 එක්ක සුපිරියටම 𝐛𝐨𝐭 දෙන්නම් එතකන් මෙහෙම පාවිච්චි කරන්න සමහර 𝐜𝐨𝐦𝐦𝐚𝐧𝐝 වැඩ නැතුව ඇති  𝐬𝐨𝐫𝐫𝐲 බන් විභගෙ ඉවර වෙලා ඒ ඔක්කොම 𝐟𝐢𝐱 කරනව️` }, { quoted: m })
+            }
+            break
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return reply(mess.owner)
