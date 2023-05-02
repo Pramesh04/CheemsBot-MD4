@@ -20,13 +20,13 @@ const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 const xeonkey = require('xfarr-api')
 const cheerio = require ("cheerio")
-const { XeonBotIncTiktok } = require('./lib/tiktokbyxeon')
+const { PRAMESHTiktok } = require('./lib/tiktokbyxeon')
 let { msgFilter } = require('./lib/antispam')
 let { covid } = require('./lib/covid.js') 
 const { EmojiAPI } = require("emoji-api")
 const emoji = new EmojiAPI()
 const thiccysapi = require('textmaker-thiccy')
-const { XeonBotIncWiki } = require('./lib/xeonywiki.js')
+const { PRAMESHWiki } = require('./lib/xeonywiki.js')
 const textpro = require('./lib/textpro')
 const { mediafireDl } = require('./lib/mediafire.js')
 const { Gempa } = require("./lib/gempa.js")
@@ -35,6 +35,28 @@ const xeontod = require("tod-api")
 const { pinterest } = require("./lib/pinterest")
 const toHur = require('@develoka/angka-terbilang-js')
 const { hentai } = require('./lib/scraper2.js')
+
+const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+const time2 = moment().tz('Asia/Kolkata').format('HH:mm:ss')  
+ if(time2 < "18:00:00"){
+var ucapanWaktu = `~*සුබ රාත්‍රියක්*~🌌`
+ }
+ if(time2 < "16:00:00"){
+var ucapanWaktu = `~*උබ සවසක්*~🌃`
+ }
+ if(time2 < "15:00:00"){
+var ucapanWaktu = `~*සුබ සවසක්*~🌃`
+ }
+ if(time2 < "12:00:00"){
+var ucapanWaktu = `~*සුබ සන්ද්‍යාවක්*~ 🌅`
+ }
+ if(time2 < "11:00:00"){
+var ucapanWaktu = `~*සුබ උදෑසනක්*~ 🌄`
+ }
+ if(time2 < "00:00:01"){
+var ucapanWaktu = `~*සුබ උදෑසනක්*~🌄`
+ } 
 const {
  FajarNews, 
  BBCNews,
@@ -191,7 +213,7 @@ let tebaklirik = db.data.game.lirik = []
 let tebaktebakan = db.data.game.tebakan = []
 let vote = db.data.others.vote = []
 
-module.exports = XeonBotInc = async (XeonBotInc, m, chatUpdate, store) => {
+module.exports = PRAMESH = async (PRAMESH, m, chatUpdate, store) => {
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
@@ -200,7 +222,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, chatUpdate, store) => {
         const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
         const args = body.trim().split(/ +/).slice(1)
         const pushname = m.pushName || "No Name"
-        const botNumber = await XeonBotInc.decodeJid(XeonBotInc.user.id)
+        const botNumber = await PRAMESH.decodeJid(PRAMESH.user.id)
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == botNumber ? true : false
         const text = q = args.join(" ")
@@ -213,7 +235,7 @@ module.exports = XeonBotInc = async (XeonBotInc, m, chatUpdate, store) => {
 	    const messagesD = body.slice(0).trim().split(/ +/).shift().toLowerCase()
 
         //group\\
-        const groupMetadata = m.isGroup ? await XeonBotInc.groupMetadata(m.chat).catch(e => {}) : ''
+        const groupMetadata = m.isGroup ? await PRAMESH.groupMetadata(m.chat).catch(e => {}) : ''
         const groupName = m.isGroup ? groupMetadata.subject : ''
         const participants = m.isGroup ? await groupMetadata.participants : ''
         const groupAdmins = m.isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
@@ -294,7 +316,7 @@ if (!('templateVideo' in setting)) setting.templateVideo = false
 	
 	// FAKE TEXT IMG
 const textImg = (teks) => {
-XeonBotInc.sendMessage(m.chat, { text :teks, }, {quoted: m, thumbnail: fs.readFileSync('./XeonMedia/image/wpmobile.png')}) 
+PRAMESH.sendMessage(m.chat, { text :teks, }, {quoted: m, thumbnail: fs.readFileSync('./XeonMedia/image/wpmobile.png')}) 
 }
 
 //FAKE CONTACT
@@ -450,15 +472,15 @@ message: {
 	
 	//group target \\
 const reply = (teks) => {
-           XeonBotInc.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": {"title": ` ${global.botname}`,"body": `${ownername}`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`),"sourceUrl": `${linkz}`}}}, { quoted: m})
+           PRAMESH.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": {"title": ` ${global.botname}`,"body": `${ownername}`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`),"sourceUrl": `${linkz}`}}}, { quoted: m})
         }
         
         const replay = (teks) => {
-            XeonBotInc.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": {"title": ` ${global.botname}`,"body": `${ownername}`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`),"sourceUrl": `${linkz}`}}}, { quoted: m})
+            PRAMESH.sendMessage(m.chat, { text: teks, contextInfo:{"externalAdReply": {"title": ` ${global.botname}`,"body": `${ownername}`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": fs.readFileSync(`./XeonMedia/theme/cheemspic.jpg`),"sourceUrl": `${linkz}`}}}, { quoted: m})
         }
 	
         //Public & Self\\
-        if (!XeonBotInc.public) {
+        if (!PRAMESH.public) {
             if (!m.key.fromMe) return
         }
 
@@ -493,7 +515,7 @@ jumlahharian = `${dataa.value}`
 	    let setting = global.db.data.settings[botNumber]
 	    if (new Date() * 1 - setting.status > 1000) {
 		let uptime = await runtime(process.uptime())
-		await XeonBotInc.setStatus(`${XeonBotInc.user.name} | Runtime : ${runtime(uptime)}`)
+		await PRAMESH.setStatus(`${PRAMESH.user.name} | Runtime : ${runtime(uptime)}`)
 		setting.status = new Date() * 1
 	    }
 	}
@@ -501,63 +523,63 @@ jumlahharian = `${dataa.value}`
 	//antispam or auto react
 //if (m.message && msgFilter.isFiltered(from)) {
 //console.log(`${global.themeemoji}[SPAM]`, color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(m.pushName))
-//return XeonBotInc.sendMessage(from, { react: { text: `${global.themeemoji}`, key: m.key }})
+//return PRAMESH.sendMessage(from, { react: { text: `${global.themeemoji}`, key: m.key }})
 //}
 	
 //auto read whatsapp status
 if (autoreadsw) {
 		if (from === 'status@broadcast') {
-		XeonBotInc.chatRead(from)
+		PRAMESH.chatRead(from)
 	}
 	}
 //autoreader gc and pm
 if (global.autoreadpmngc) {
 if (command) {
-await XeonBotInc.sendPresenceUpdate('composing', m.chat)
-XeonBotInc.sendReadReceipt(from, m.sender, [m.key.id])}
+await PRAMESH.sendPresenceUpdate('composing', m.chat)
+PRAMESH.sendReadReceipt(from, m.sender, [m.key.id])}
 }
   //autoread gc only
   if (global.autoReadGc) {
-  if (m.isGroup) { XeonBotInc.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
+  if (m.isGroup) { PRAMESH.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
 }
   //auto recording all
-    if (global.autoRecord) { if (m.chat) { XeonBotInc.sendPresenceUpdate('recording', m.chat) }
+    if (global.autoRecord) { if (m.chat) { PRAMESH.sendPresenceUpdate('recording', m.chat) }
 }
 //autotyper all
-  if (global.autoTyping) { if (m.chat) { XeonBotInc.sendPresenceUpdate('composing', m.chat) }
+  if (global.autoTyping) { if (m.chat) { PRAMESH.sendPresenceUpdate('composing', m.chat) }
 }
 //auto available all
-  if (global.available) { if (m.chat) { XeonBotInc.sendPresenceUpdate('available', m.chat) }
+  if (global.available) { if (m.chat) { PRAMESH.sendPresenceUpdate('available', m.chat) }
   }
 
 // Autosticker gc
         if (isAutoSticker) {
             if (/image/.test(mime) && !/webp/.test(mime)) {
                 let mediac = await quoted.download()
-                await XeonBotInc.sendImageAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
+                await PRAMESH.sendImageAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
                 console.log(`Auto sticker detected`)
             } else if (/video/.test(mime)) {
                 if ((quoted.msg || quoted).seconds > 11) return
                 let mediac = await quoted.download()
-                await XeonBotInc.sendVideoAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
+                await PRAMESH.sendVideoAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
             }
         }
         //Autosticker pc
                 if (isAutoStick) {
             if (/image/.test(mime) && !/webp/.test(mime)) {
                 let mediac = await quoted.download()
-                await XeonBotInc.sendImageAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
+                await PRAMESH.sendImageAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
                 console.log(`Auto sticker detected`)
             } else if (/video/.test(mime)) {
                 if ((quoted.msg || quoted).seconds > 11) return
                 let mediac = await quoted.download()
-                await XeonBotInc.sendVideoAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
+                await PRAMESH.sendVideoAsSticker(from, mediac, m, { packname: global.packname, author: global.author })
             }
         }
 
 	// AntiLinkgc
 if (AntiLink) {
-linkgce = await XeonBotInc.groupInviteCode(from)
+linkgce = await PRAMESH.groupInviteCode(from)
 if (budy.includes(`https://chat.whatsapp.com/${linkgce}`)) {
 reply(`\`\`\`「 Group Link Detected 」\`\`\`\n\nYou won't be kicked by a bot because what you send is a link to this group`)
 } else if (isUrl(m.text)) {
@@ -566,8 +588,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Group Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Group Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 }
@@ -580,8 +602,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Wa.me Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube video link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Wa.me Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube video link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
   if (antiWame)
@@ -592,8 +614,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Wa.me Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube video link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Wa.me Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube video link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antivirtex by xeon
@@ -602,7 +624,7 @@ XeonBotInc.sendMessage(from, {text:`\`\`\`「 Wa.me Link Detected 」\`\`\`\n\n@
   reply(`Somebody spammed virus!! Mark as read⚠️\n`.repeat(300))
   reply(`\`\`\`「 Virus Detected 」\`\`\`\n\nSorry You Will Be Kicked !`)
   if (!isBotAdmins) return reply(mess.botAdmin)
-  XeonBotInc.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+  PRAMESH.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
   }
   }
 //anti bad words by xeon
@@ -617,8 +639,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Bad Word Detected 」\`\`\`\n\n@${kice.split("@")[0]} was kicked because of using bad words in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})}
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Bad Word Detected 」\`\`\`\n\n@${kice.split("@")[0]} was kicked because of using bad words in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})}
 }
 //antilink youtube video by xeon
 if (AntiLinkYoutubeVid)
@@ -629,8 +651,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 YouTube Video Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube video link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 YouTube Video Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube video link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antilink youtube channel by xeon
@@ -642,8 +664,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 YouTube Channel Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube channel link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 YouTube Channel Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending youtube channel link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antilink instagram by xeon
@@ -655,8 +677,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Instagram Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending instagram link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Instagram Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending instagram link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antilink facebook by xeon
@@ -668,8 +690,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Facebook Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending facebook link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Facebook Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending facebook link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antilink telegram by xeon
@@ -682,8 +704,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Telegram Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending telegram link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Telegram Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending telegram link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antilink tiktok by xeon
@@ -695,8 +717,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Tiktok Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending tiktok link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Tiktok Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending tiktok link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antilink twitter by xeon
@@ -708,8 +730,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Tiktok Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending twitter link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Tiktok Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending twitter link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 //antilink all by xeon
@@ -721,8 +743,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-XeonBotInc.sendMessage(from, {text:`\`\`\`「 Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await PRAMESH.groupParticipantsUpdate(m.chat, [kice], 'remove')
+PRAMESH.sendMessage(from, {text:`\`\`\`「 Link Detected 」\`\`\`\n\n@${kice.split("@")[0]} Has been kicked because of sending link in this group`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 
@@ -731,28 +753,28 @@ XeonBotInc.sendMessage(from, {text:`\`\`\`「 Link Detected 」\`\`\`\n\n@${kice
         for (let anji of xeonysticker){
 				if (budy === anji){
 					result = fs.readFileSync(`./XeonMedia/sticker/${anji}.webp`)
-					XeonBotInc.sendMessage(m.chat, { sticker: result }, { quoted: m })
+					PRAMESH.sendMessage(m.chat, { sticker: result }, { quoted: m })
 					}
 			}
 			  //if (Autoreply) //remove forwad slashes to make it autoreply on off
 			for (let anju of xeonyaudio){
 				if (budy === anju){
 					result = fs.readFileSync(`./XeonMedia/audio/${anju}.mp3`)
-					XeonBotInc.sendMessage(m.chat, { audio: result, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
+					PRAMESH.sendMessage(m.chat, { audio: result, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 					}
 			}
 			  //if (Autoreply) //remove forwad slashes to make it autoreply on off
 			for (let anjh of xeonyimage){
 				if (budy === anjh){
 					result = fs.readFileSync(`./XeonMedia/image/${anjh}.jpg`)
-					XeonBotInc.sendMessage(m.chat, { image: result }, { quoted: m })
+					PRAMESH.sendMessage(m.chat, { image: result }, { quoted: m })
 					}
 			}
 			  //if (Autoreply) //remove forwad slashes to make it autoreply on off
 					for (let anjh of xeonyvideo){
 				if (budy === anjh){
 					result = fs.readFileSync(`./XeonMedia/video/${anjh}.mp4`)
-					XeonBotInc.sendMessage(m.chat, { video: result }, { quoted: m })
+					PRAMESH.sendMessage(m.chat, { video: result }, { quoted: m })
 					}
 				  }
 
@@ -765,7 +787,7 @@ emoji.get(satu)
 .then(emoji => {
 const buttons = [{buttonId: "y", buttonText: {displayText:satu}, type: 1}]
 const buttonMessage = {image: {url: emoji.images[dua].url},caption: "Here you go!",footerText: `${botname}`,buttons: buttons,headerType: 4}
-XeonBotInc.sendMessage(from, buttonMessage, {quoted:m})
+PRAMESH.sendMessage(from, buttonMessage, {quoted:m})
 })
 } catch (e) {
 reply("Emoji error, please enter another emoji\nNOTE : Just enter 1 emoji")
@@ -788,10 +810,10 @@ reply("Emoji error, please enter another emoji\nNOTE : Just enter 1 emoji")
         let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
         let { text, mentionedJid } = hash
         let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
-            userJid: XeonBotInc.user.id,
+            userJid: PRAMESH.user.id,
             quoted: m.quoted && m.quoted.fakeObj
         })
-        messages.key.fromMe = areJidsSameUser(m.sender, XeonBotInc.user.id)
+        messages.key.fromMe = areJidsSameUser(m.sender, PRAMESH.user.id)
         messages.key.id = m.key.id
         messages.pushName = m.pushName
         if (m.isGroup) messages.participant = m.sender
@@ -800,7 +822,7 @@ reply("Emoji error, please enter another emoji\nNOTE : Just enter 1 emoji")
             messages: [proto.WebMessageInfo.fromObject(messages)],
             type: 'append'
         }
-        XeonBotInc.ev.emit('messages.upsert', msg)
+        PRAMESH.ev.emit('messages.upsert', msg)
         }
 	    
 	if (('family100'+m.chat in _family100) && isCmd) {
@@ -821,7 +843,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
         return isSurender || room.terjawab[index] ? `(${index + 1}) ${jawaban} ${room.terjawab[index] ? '@' + room.terjawab[index].split('@')[0] : ''}`.trim() : false
     }).filter(v => v).join('\n')}
     ${isSurender ? '' : `Perfect Player`}`.trim()
-            XeonBotInc.sendText(m.chat, caption, m, { contextInfo: { mentionedJid: parseMention(caption) }}).then(mes => { return _family100['family100'+m.chat].pesan = mesg }).catch(_ => _)
+            PRAMESH.sendText(m.chat, caption, m, { contextInfo: { mentionedJid: parseMention(caption) }}).then(mes => { return _family100['family100'+m.chat].pesan = mesg }).catch(_ => _)
             if (isWin || isSurender) delete _family100['family100'+m.chat]
         }
 
@@ -829,7 +851,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             kuis = true
             jawaban = tebaklagu[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await XeonBotInc.sendButtonText(m.chat, [{ buttonId: 'guess song', buttonText: { displayText: 'Guess The Song' }, type: 1 }], `🎮 Guess The Music 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, XeonBotInc.user.name, m)
+                await PRAMESH.sendButtonText(m.chat, [{ buttonId: 'guess song', buttonText: { displayText: 'Guess The Song' }, type: 1 }], `🎮 Guess The Music 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, PRAMESH.user.name, m)
                 delete tebaklagu[m.sender.split('@')[0]]
             } else reply('*Wrong Answer!*')
         }
@@ -847,7 +869,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             kuis = true
             jawaban = tebakgambar[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await XeonBotInc.sendButtonText(m.chat, [{ buttonId: 'guess picture', buttonText: { displayText: 'Guess The Picture' }, type: 1 }], `🎮 Guess The Picture 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, XeonBotInc.user.name, m)
+                await PRAMESH.sendButtonText(m.chat, [{ buttonId: 'guess picture', buttonText: { displayText: 'Guess The Picture' }, type: 1 }], `🎮 Guess The Picture 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, PRAMESH.user.name, m)
                 delete tebakgambar[m.sender.split('@')[0]]
             } else reply('*Wrong Answer!*')
         }
@@ -856,7 +878,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             kuis = true
             jawaban = tebakkata[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await XeonBotInc.sendButtonText(m.chat, [{ buttonId: 'guess word', buttonText: { displayText: 'Guess The Word' }, type: 1 }], `🎮 Guess The Word 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, XeonBotInc.user.name, m)
+                await PRAMESH.sendButtonText(m.chat, [{ buttonId: 'guess word', buttonText: { displayText: 'Guess The Word' }, type: 1 }], `🎮 Guess The Word 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, PRAMESH.user.name, m)
                 delete tebakkata[m.sender.split('@')[0]]
             } else reply('*Wrong Answer!*')
         }
@@ -866,7 +888,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             jawaban = caklontong[m.sender.split('@')[0]]
 	    deskripsi = caklontong_desk[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await XeonBotInc.sendButtonText(m.chat, [{ buttonId: 'guess blank', buttonText: { displayText: 'Guess The Blank' }, type: 1 }], `🎮 Guess The Blank 🎮\n\nCorrect Answer 🎉\n*${deskripsi}*\n\nWant To Play Again? Press The Button Below`, XeonBotInc.user.name, m)
+                await PRAMESH.sendButtonText(m.chat, [{ buttonId: 'guess blank', buttonText: { displayText: 'Guess The Blank' }, type: 1 }], `🎮 Guess The Blank 🎮\n\nCorrect Answer 🎉\n*${deskripsi}*\n\nWant To Play Again? Press The Button Below`, PRAMESH.user.name, m)
                 delete caklontong[m.sender.split('@')[0]]
 		delete caklontong_desk[m.sender.split('@')[0]]
             } else reply('*Wrong Answer!*')
@@ -876,7 +898,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             kuis = true
             jawaban = tebakkalimat[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await XeonBotInc.sendButtonText(m.chat, [{ buttonId: 'guess sentence', buttonText: { displayText: 'Guess The Sentence' }, type: 1 }], `🎮 Guess The Sentence 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, XeonBotInc.user.name, m)
+                await PRAMESH.sendButtonText(m.chat, [{ buttonId: 'guess sentence', buttonText: { displayText: 'Guess The Sentence' }, type: 1 }], `🎮 Guess The Sentence 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, PRAMESH.user.name, m)
                 delete tebakkalimat[m.sender.split('@')[0]]
             } else reply('*Wrong Answer!*')
         }
@@ -885,7 +907,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             kuis = true
             jawaban = tebaklirik[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await XeonBotInc.sendButtonText(m.chat, [{ buttonId: 'guess lyrics', buttonText: { displayText: 'Guess The Lyrics' }, type: 1 }], `🎮 Guess The Lyrics 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, XeonBotInc.user.name, m)
+                await PRAMESH.sendButtonText(m.chat, [{ buttonId: 'guess lyrics', buttonText: { displayText: 'Guess The Lyrics' }, type: 1 }], `🎮 Guess The Lyrics 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, PRAMESH.user.name, m)
                 delete tebaklirik[m.sender.split('@')[0]]
             } else reply('*Wrong Answer!*')
         }
@@ -894,7 +916,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             kuis = true
             jawaban = tebaktebakan[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await XeonBotInc.sendButtonText(m.chat, [{ buttonId: 'guess riddle', buttonText: { displayText: 'Guess The Riddle' }, type: 1 }], `🎮 Guess The Riddle 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, XeonBotInc.user.name, m)
+                await PRAMESH.sendButtonText(m.chat, [{ buttonId: 'guess riddle', buttonText: { displayText: 'Guess The Riddle' }, type: 1 }], `🎮 Guess The Riddle 🎮\n\nCorrect Answer 🎉\n\nWant To Play Again? Press The Button Below`, PRAMESH.user.name, m)
                 delete tebaktebakan[m.sender.split('@')[0]]
             } else reply('*Wrong Answer!*')
         }
@@ -957,8 +979,8 @@ ${isWin ? `@${winner.split('@')[0]} Won!` : isTie ? `Game Over` : `Turn ${['❌'
 Typed *surrender* to surrender and admited defeat`
 	    if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
 	    room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
-	    if (room.x !== room.o) await XeonBotInc.sendText(room.x, str, m, { mentions: parseMention(str) } )
-	    await XeonBotInc.sendText(room.o, str, m, { mentions: parseMention(str) } )
+	    if (room.x !== room.o) await PRAMESH.sendText(room.x, str, m, { mentions: parseMention(str) } )
+	    await PRAMESH.sendText(room.o, str, m, { mentions: parseMention(str) } )
 	    if (isTie || isWin) {
 	    delete this.game[room.id]
 	    }
@@ -972,7 +994,7 @@ Typed *surrender* to surrender and admited defeat`
 	    let tie = false
 	    if (m.sender == roof.p2 && /^(acc(ept)?|accept|yes|okay?|reject|no|later|nope(k.)?yes|y)/i.test(m.text) && m.isGroup && roof.status == 'wait') {
 	    if (/^(reject|no|later|n|nope(k.)?yes)/i.test(m.text)) {
-	    XeonBotInc.sendTextWithMentions(m.chat, `@${roof.p2.split`@`[0]} Refuse Suit, Suit Canceled`, m)
+	    PRAMESH.sendTextWithMentions(m.chat, `@${roof.p2.split`@`[0]} Refuse Suit, Suit Canceled`, m)
 	    delete this.suit[roof.id]
 	    return !0
 	    }
@@ -980,20 +1002,20 @@ Typed *surrender* to surrender and admited defeat`
 	    roof.asal = m.chat
 	    clearTimeout(roof.waktu)
 	    //delete roof[roof.id].waktu
-	    XeonBotInc.sendText(m.chat, `Suit Has Been Sent To Chat
+	    PRAMESH.sendText(m.chat, `Suit Has Been Sent To Chat
 
 @${roof.p.split`@`[0]} dan 
 @${roof.p2.split`@`[0]}
 
 Please Choose A Suit In The Respective Chat"
 Click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] })
-	    if (!roof.pilih) XeonBotInc.sendText(roof.p, `Please Select \n\Rock🗿\nPaper📄\nScissors✂️`, m)
-	    if (!roof.pilih2) XeonBotInc.sendText(roof.p2, `Please Select \n\nRock🗿\nPaper📄\nScissors✂️`, m)
+	    if (!roof.pilih) PRAMESH.sendText(roof.p, `Please Select \n\Rock🗿\nPaper📄\nScissors✂️`, m)
+	    if (!roof.pilih2) PRAMESH.sendText(roof.p2, `Please Select \n\nRock🗿\nPaper📄\nScissors✂️`, m)
 	    roof.waktu_milih = setTimeout(() => {
-	    if (!roof.pilih && !roof.pilih2) XeonBotInc.sendText(m.chat, `Both Players Don't Want To Play,\nSuit Canceled`)
+	    if (!roof.pilih && !roof.pilih2) PRAMESH.sendText(m.chat, `Both Players Don't Want To Play,\nSuit Canceled`)
 	    else if (!roof.pilih || !roof.pilih2) {
 	    win = !roof.pilih ? roof.p2 : roof.p
-	    XeonBotInc.sendTextWithMentions(m.chat, `@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} Didn't Choose Suit, Game Over!`, m)
+	    PRAMESH.sendTextWithMentions(m.chat, `@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} Didn't Choose Suit, Game Over!`, m)
 	    }
 	    delete this.suit[roof.id]
 	    return !0
@@ -1009,13 +1031,13 @@ Click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 	    roof.pilih = reg.exec(m.text.toLowerCase())[0]
 	    roof.text = m.text
 	    reply(`You Have Chosen ${m.text} ${!roof.pilih2 ? `\n\nWaiting For The Opponent To Choose` : ''}`)
-	    if (!roof.pilih2) XeonBotInc.sendText(roof.p2, '_The Opponent Has Chosen_\nNow It Is Your Turn', 0)
+	    if (!roof.pilih2) PRAMESH.sendText(roof.p2, '_The Opponent Has Chosen_\nNow It Is Your Turn', 0)
 	    }
 	    if (jwb2 && reg.test(m.text) && !roof.pilih2 && !m.isGroup) {
 	    roof.pilih2 = reg.exec(m.text.toLowerCase())[0]
 	    roof.text2 = m.text
 	    reply(`You Have Chosen ${m.text} ${!roof.pilih ? `\n\nWaiting For The Opponent To Choose` : ''}`)
-	    if (!roof.pilih) XeonBotInc.sendText(roof.p, '_The Opponent Has Chosen_\nNow It Is Your Turn', 0)
+	    if (!roof.pilih) PRAMESH.sendText(roof.p, '_The Opponent Has Chosen_\nNow It Is Your Turn', 0)
 	    }
 	    let stage = roof.pilih
 	    let stage2 = roof.pilih2
@@ -1028,7 +1050,7 @@ Click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] 
 	    else if (k.test(stage) && b.test(stage2)) win = roof.p
 	    else if (k.test(stage) && g.test(stage2)) win = roof.p2
 	    else if (stage == stage2) tie = true
-	    XeonBotInc.sendText(roof.asal, `_*Suit Results*_${tie ? '\nSERIES' : ''}
+	    PRAMESH.sendText(roof.asal, `_*Suit Results*_${tie ? '\nSERIES' : ''}
 
 @${roof.p.split`@`[0]} (${roof.text}) ${tie ? '' : roof.p == win ? ` Win \n` : ` Lost \n`}
 @${roof.p2.split`@`[0]} (${roof.text2}) ${tie ? '' : roof.p2 == win ? ` Win \n` : ` Lost \n`}
@@ -1112,7 +1134,7 @@ async function cerpen (category) {
 
 switch(command) {
 case 'alive': case 'menu': case 'panel': {
-    XeonBotInc.sendMessage(from, { react: { text: `🦁`, key: m.key }})     
+    PRAMESH.sendMessage(from, { react: { text: `🦁`, key: m.key }})     
     let buttons = [
     {buttonId: `bbb`, buttonText: {displayText: '☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒'}, type: 1},
     {buttonId: `allmenu`, buttonText: {displayText: '📚𝐀𝐋𝐋 𝐌𝐄𝐍𝐔📚'}, type: 1},
@@ -1125,8 +1147,295 @@ case 'alive': case 'menu': case 'panel': {
     buttons: buttons,
     headerType: 4,
     }
-    XeonBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
-    }	
+    PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
+    }
+    break
+ case 'setalivemsg':{
+ if (!isCreator) return reply(`${mess.owner}`)
+ if (!text) return reply(`*_මැසේජ් එක ඇතුලත් කරන්න_*`)
+ PRAMESH.sendMessage(from, { react: { text: `⚙️`, key: m.key }})
+   global.alivemsg = text
+   m.reply("🌍🔗alive masege එක වෙනස් කරා🔗🌍")
+}
+break
+ case 'setalivepic':{
+ if (!isCreator) return reply(`${mess.owner}`)
+ if (!text) return reply(`_*alive picture එකේ link එක ඇතුලත් කරන්න*_`)
+ PRAMESH.sendMessage(from, { react: { text: `⚙️`, key: m.key }})
+   global.alivepic = text
+   m.reply("🌍🔗alive picture එක වෙනස් කරා🔗🌍")
+}
+break
+case 'owner': case 'creator': case 'moderator': case 'mod': {
+PRAMESH.sendMessage(from, { react: { text: `🙋`, key: m.key }})
+PRAMESH.sendContact(m.chat, owner, m)
+}
+            break
+case 'ratestar': case 'rateus': case 'rate': {
+    PRAMESH.sendMessage(from, { react: { text: `✡️`, key: m.key }}) 
+    let buttons = [
+    {buttonId: `1star`, buttonText: {displayText: '😊★★★★★😊'}, type: 1},
+    {buttonId: `2star`, buttonText: {displayText: '😐★★★😐'}, type: 1},
+    {buttonId: `3star`, buttonText: {displayText: '😒★😒'}, type: 1}
+    ]
+    let buttonMessage = {
+    image: { url: `https://i.ibb.co/0qyRJvQ/Picsart-23-01-24-16-24-18-396.jpg` },
+    caption: `හායි ${pushname}\n*★𝐑𝐀𝐓𝐄 𝐔𝐒★*\n*𝐒𝐄𝐋𝐄𝐂𝐓 𝐘𝐎𝐔𝐑 𝐑𝐀𝐓𝐄 𝐒𝐓𝐀𝐑*`,
+    footer: `☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒`,
+    buttons: buttons,
+    headerType: 4,
+    }
+    PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
+    }
+ break
+            case '3star': {
+            PRAMESH.sendMessage(from, { react: { text: `😒`, key: m.key }})
+                PRAMESH.sendMessage(from, { text: `*★ඔය එක තරුව තියල ඉදගනින්😒*` }, { quoted: m })
+            }
+            break
+            case '2star': {
+            PRAMESH.sendMessage(from, { react: { text: `😐`, key: m.key }})
+                PRAMESH.sendMessage(from, { text: `*★★★thanks your rate😐*` }, { quoted: m })
+            }
+            break
+            case '1star': {
+            PRAMESH.sendMessage(from, { react: { text: `☺️`, key: m.key }})
+                PRAMESH.sendMessage(from, { text: `*☺️★★★★★\n𝚃𝙷𝙰𝙽𝙺𝚂 𝚈𝙾𝚄𝚁 𝚁𝙰𝚃𝙴☺️*` }, { quoted: m })
+            }
+            break
+case 'allmenu': {
+    PRAMESH.sendMessage(from, { react: { text: `📜`, key: m.key }}) 
+    let buttons = [
+    {buttonId: `bbb`, buttonText: {displayText: '☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒'}, type: 1},
+    {buttonId: `allmenu`, buttonText: {displayText: '📚𝐀𝐋𝐋 𝐌𝐄𝐍𝐔📚'}, type: 1},
+    {buttonId: `rateus`, buttonText: {displayText: '✨𝚁𝙰𝚃𝙴_𝚄𝚂✨'}, type: 1}
+    ]
+    let buttonMessage = {
+    image: { url: `https://i.ibb.co/CMCNByx/Picsart-22-07-03-15-45-00-698.jpg` },
+    caption: `╒ ☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒☷▕━⛟
+┠──☾owner☽────◑
+┃${global.menuimoji}owner
+┃${global.menuimoji}setalivepic
+┃${global.menuimoji}setalivemsg
+┃${global.menuimoji}antikall
+┃${global.menuimoji}join
+┃${global.menuimoji}leavegc
+┃${global.menuimoji}block
+┃${global.menuimoji}unblock
+┠──☾Group☽────◑
+┃${global.menuimoji}add
+┃${global.menuimoji}kick
+┃${global.menuimoji}tagall
+┃${global.menuimoji}antilink
+┃${global.menuimoji}antitoxic
+┃${global.menuimoji}antiwame
+┃${global.menuimoji}antilinkfb
+┃${global.menuimoji}antilinktiktok
+┃${global.menuimoji}antilinktwitter
+┃${global.menuimoji}antilinkyoutubech
+┃${global.menuimoji}antilinkyoutubevideo
+┃${global.menuimoji}antilinkinstagram
+┃${global.menuimoji}antilinktelegram
+┠──☾media☽────◑
+┃${global.menuimoji}song
+┃${global.menuimoji}video
+┃${global.menuimoji}mediafire
+┃${global.menuimoji}fb
+┃${global.menuimoji}tiktok
+┃${global.menuimoji}ehi
+┃${global.menuimoji}img
+┃${global.menuimoji}spotify
+┃${global.menuimoji}instagram
+┃${global.menuimoji}serchsong
+┃${global.menuimoji}serchvideo
+┃${global.menuimoji}apk
+┃${global.menuimoji}film
+┃${global.menuimoji}lyrics
+┠─☾Logo packs☽───◑
+┃${global.menuimoji}logo1
+┃${global.menuimoji}logo2
+┃${global.menuimoji}logo3
+┠─☾covert☽─────◑
+┃${global.menuimoji}sticker
+┃${global.menuimoji}translate
+┃${global.menuimoji}tomp3
+┠─☾other☽─────◑
+┃${global.menuimoji}alive
+┃${global.menuimoji}script
+┃${global.menuimoji}allmenu
+┃${global.menuimoji}rate
+┃${global.menuimoji}
+┗━━━━━━━━━━━⛟`,
+    footer: `☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒`,
+    buttons: buttons,
+    headerType: 4,
+    }
+    PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
+    }
+ break
+case 'bbb': case 'pn': case 'script': {
+    PRAMESH.sendMessage(from, { react: { text: `⚙️`, key: m.key }}) 
+    let buttons = [
+    {buttonId: `alive`, buttonText: {displayText: '𝐀𝐋𝐈𝐕𝐄'}, type: 1},
+    {buttonId: `owner`, buttonText: {displayText: '𝐎𝐖𝐍𝐄𝐑'}, type: 1},
+    {buttonId: `notes`, buttonText: {displayText: '💚𝐍𝐎𝐓𝐄💚'}, type: 1}
+    ]
+    let buttonMessage = {
+    image: { url: `https://i.ibb.co/bH371tY/Picsart-22-10-02-11-18-47-805.jpg` },
+    caption: `*▕☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒▕*
+
+*🪀𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐂𝐇𝐀𝐍𝐄𝐋 𝐋𝐈𝐍𝐊🪀*
+https://youtube.com/channel/UCOlt2_XK6tS2KJn6fTdpPew
+
+*🪀𝐁𝐎𝐓 𝐒𝐂𝐑𝐈𝐏𝐓 𝐋𝐈𝐍𝐊🪀*
+https://sites.google.com/view/pramesh-lion-bot/%E0%B6%B1%E0%B7%80%E0%B7%83?read_current=1
+
+*🪀𝐁𝐎𝐓 𝐇𝐄𝐋𝐏𝐈𝐍𝐆 𝐆𝐑𝐎𝐔𝐏🪀*
+https://chat.whatsapp.com/FDpARRbNUKjLkfbm2xRv2M
+
+💠💠💠💠💠💠💠💠💠💠💠
+*⃦ 𝐓𝐇𝐀𝐍𝐊𝐒 ⃦*`,
+    footer: `☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒`,
+    buttons: buttons,
+    headerType: 4,
+    }
+    PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
+    }
+            break
+case 'song': case 'yt': case 'play': {
+ if (isBan) return reply(mess.ban)
+	if (isBanChat) return reply(mess.banChat)
+//if (isLimit(m.sender, isPremium, isCreator, limitCount, limit)) return m.reply(mess.endLimit)
+PRAMESH.sendMessage(from, { react: { text: `🎧`, key: m.key }})
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("yt-search")
+                let search = await yts(text)
+                let anu = search.videos[0] 
+                let buf = await getBuffer(anu.thumbnail)
+                let caption = `
+*| ☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒ |*
+◈━━━━━━━━━━━━━━━◈            
+╒════════════════
+┝ 📝 Title : ${anu.title}
+┝ 🔍 Ext : Search
+┝ 🔗 ID : ${anu.videoId}
+┝ ⏰ Duration : ${anu.timestamp}
+┝ 🌝 Viewers : ${anu.views}
+┝ ⏳ Uploaded : ${anu.ago}
+┝ 🔮 Author : ${anu.author.name}
+┝ 🌐 Channel : ${anu.author.url}
+┝ ⛓️ Description : ${anu.description}
+┝ ✏️ Url : ${anu.url}
+┕────────────
+`
+message = await prepareWAMessageMedia({ image : { url: anu.thumbnail } }, { upload:   PRAMESH.waUploadToServer })
+const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            hydratedContentText: caption,
+                            imageMessage: message.imageMessage,
+                            hydratedFooterText: `${botname}`,
+                            hydratedButtons: [{
+          urlButton: {
+                  displayText: '🎸YOUTUBE CHANEL🎸',
+                  url: `https://youtube.com/channel/UCOlt2_XK6tS2KJn6fTdpPew`
+          }
+                            }, {
+                            	urlButton: {
+          displayText: `🪀SUPPORT GROUP🪀`, 
+                  url: `https://chat.whatsapp.com/FDpARRbNUKjLkfbm2xRv2M`
+          }
+                            }, {
+          quickReplyButton: {
+                  displayText: `༺🎬𝐕𝐈𝐃𝐄𝐎🎬༻`,
+                  id: `${prefix}video ${anu.url}`
+          }
+          }, {
+          quickReplyButton: {
+                  displayText: `༺🎶𝐃𝐎𝐂𝐔𝐌𝐄𝐍𝐓🎶༻`,
+                  id: `${prefix}ytdoc ${anu.url}`
+          }
+           },{
+          quickReplyButton: {
+                  displayText: `༺🎶𝐒𝐎𝐍𝐆🎶༻`,
+                  id: `${prefix}ytmp3 ${anu.url}`
+          }
+           }]
+                        }
+                    }
+                
+                }), { userJid: m.chat })
+                PRAMESH.relayMessage(m.chat, template.message, { messageId: template.key.id })
+}
+break
+case 'video': { 
+    PRAMESH.sendMessage(from, { react: { text: `📽️`, key: m.key }})    
+        if (!text) return reply(`Example : ${prefix + command} lelena`)
+ let yts = require("yt-search")
+ let search = await yts(text)
+ let anu = search.videos[0]
+ let buttons = [
+ {buttonId: `ytmp4 ${anu.url} 360p`, buttonText: {displayText: '⚡360p⚡'}, type: 1},
+ {buttonId: `ytmp4 ${anu.url} 480p`, buttonText: {displayText: '⚡480p⚡'}, type: 1},
+ {buttonId: `ytmp4 ${anu.url} 720p`, buttonText: {displayText: '⚡720p⚡'}, type: 1}
+ ]
+ let buttonMessage = {
+ image: { url: anu.thumbnail },
+ caption: `*║☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒☬║*
+     
+   📥 𝐕𝐈𝐃𝐄𝐎 𝐃𝐎𝐖𝐍𝐋𝐎𝐃𝐄𝐑
+ 
+*┃🎬Title :* ${anu.title} 
+ 
+*┃🎲Duration :* ${anu.timestamp} 
+ 
+*┃🌐Author :* ${anu.author.name} 
+ 
+*┃📃Url :* ${anu.url} 
+
+*┃🔖Runtime :* ${runtime(process.uptime())}
+ 
+*┃BOT NAME :* *☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒*
+
+┗━━━━━━━━━❊`,
+ footer: `☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒`,
+ buttons: buttons,
+ headerType: 4,
+ }
+ PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
+ }
+ break
+                            case 'ytmp3': {	 
+PRAMESH.sendMessage(from, { react: { text: `🎶`, key: m.key }})   
+                     let { yta } = require('./lib/y2mate')
+                     if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
+                     if (!isUrl(args[0]) && !args[0].includes('youtube.com')) return reply(`The link you provided is invalid`)
+                     let quality = args[1] ? args[1] : '128kbps'
+                     let media = await yta(text, quality)
+                     if (media.filesize >= 999999) return reply('*File Over Limit* '+util.format(media))                
+                     buf = await getBuffer(media.thumb) 
+                     const auddown = await PRAMESH.sendMessage(from , { text: '📥 Downloading Your Song...' }, { quoted: m } )
+                     await PRAMESH.sendMessage(from, { delete: auddown.key })
+                     const audup = await PRAMESH.sendMessage(from , { text: '📤 Uploading Your Song...' }, { quoted: m } )
+                     const aud = await PRAMESH.sendMessage(m.chat, {audio:{url:media.dl_link}, mimetype:"audio/mpeg", fileName: `${media.title}.mp3`}, { quoted: m }) .catch((err) => reply(mess.error))
+                     await PRAMESH.sendMessage(from, { delete: audup.key })               
+                     }
+                 break
+case 'ytdoc': {	    
+PRAMESH.sendMessage(from, { react: { text: `📂`, key: m.key }})
+    let { yta } = require('./lib/y2mate')
+    if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
+    if (!isUrl(args[0]) && !args[0].includes('youtube.com')) return reply(`The link you provided is invalid`)
+    let quality = args[1] ? args[1] : '128kbps'
+    let media = await yta(text, quality)
+    if (media.filesize >= 999999) return reply('*File Over Limit* '+util.format(media))                
+    buf = await getBuffer(media.thumb) 
+    const auddown = await PRAMESH.sendMessage(from , { text: '📥 Downloading Your Song...' }, { quoted: m } )
+    await PRAMESH.sendMessage(from, { delete: auddown.key })
+    const audup = await PRAMESH.sendMessage(from , { text: '📤 Uploading Your Song...' }, { quoted: m } )
+    const aud = await PRAMESH.sendMessage(m.chat, {document:{url:media.dl_link}, mimetype:"audio/mpeg", fileName: `${media.title}.mp3`}, { quoted: m }) .catch((err) => reply(mess.error))
+    await PRAMESH.sendMessage(from, { delete: audup.key })               
+    }
 break
             default:
                 if (budy.startsWith('=>')) {
@@ -1192,8 +1501,8 @@ if (antitags === false) return
 if (!m.isGroup) return
 if (m.key.fromMe) return
 sendNye = fs.readFileSync('./XeonMedia/theme/yourtag.webp')
-XeonBotInc.sendReadReceipt(m.chat, m.sender, [m.key.id])
-XeonBotInc.sendMessage(from, {sticker:sendNye, contextInfo:{forwardingScore: 800, isForwarded: true}}, {quoted:m})
+PRAMESH.sendReadReceipt(m.chat, m.sender, [m.key.id])
+PRAMESH.sendMessage(from, {sticker:sendNye, contextInfo:{forwardingScore: 800, isForwarded: true}}, {quoted:m})
 }
 //anti-tag 3
 if (budy.includes(`${global.ownertag}`)) {
@@ -1201,15 +1510,15 @@ if (antitags === false) return
 if (!m.isGroup) return
 if (m.key.fromMe) return
 sendNye = fs.readFileSync('./XeonMedia/theme/yourtag.webp')
-XeonBotInc.sendReadReceipt(m.chat, m.sender, [m.key.id])
-XeonBotInc.sendMessage(from, {sticker:sendNye, contextInfo:{forwardingScore: 800, isForwarded: true}}, {quoted:m})
+PRAMESH.sendReadReceipt(m.chat, m.sender, [m.key.id])
+PRAMESH.sendMessage(from, {sticker:sendNye, contextInfo:{forwardingScore: 800, isForwarded: true}}, {quoted:m})
 }
 		if (isCmd && budy.toLowerCase() != undefined) {
 		    if (m.chat.endsWith('broadcast')) return
 		    if (m.isBaileys) return
 		    let msgs = global.db.data.database
 		    if (!(budy.toLowerCase() in msgs)) return
-		    XeonBotInc.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
+		    PRAMESH.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		}
         }
         
