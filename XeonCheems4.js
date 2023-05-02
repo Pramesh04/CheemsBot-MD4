@@ -263,6 +263,7 @@ const Autoreply = m.isGroup ? autorep.includes(from) : true
         const isBanChat = m.isGroup ? banchat.includes(from) : false
 autoreadsw = true
 //react✅
+
 PRAMESH.sendMessage(m.chat, {
           react: {
            text: `${pickRandom(['💚','❤️','🦁','🦁','🦁','💖','😒','🙄','😆','💖','😊','😊','😒','😆','😆'])}`,
@@ -280,7 +281,7 @@ const solot = [
 		//
 const kruthima = ['inbox ඒම තහනම් කර ඇත\n\n\n☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒','මම කෘතිම බුද්දියකින් ක්‍රියාකරන රොබෝ වරයෙකි😊💖','මට තේරෙන විදිහට ඔබට පිස්සු🙄😒','https://chat.whatsapp.com/FDpARRbNUKjLkfbm2xRv2M \n\n\n☬༒𝙥𝙧𝙖𝙢𝙚𝙨𝙝༆𝙡𝙞𝙤𝙣⃕ 𝙗𝙤𝙩༒','මොකද වෙලාතියෙන්නෙ😒😁','මට මැසේජ් කරාට මම මනුස්සයෙක්නම් නෙමෙයි😆','හරි හරි මට තේරුනා ඔයාට පිස්සු','ආස නෑ මන් ඕවට','හා','එල🥲👍','මම කෘතිම බුදියකින් වැඩකරන රොබෝ වරයෙකි👍'] 
 const kruthi = kruthima[Math.floor(Math.random() * kruthima.length)]
-if (!m.isGroup) return replay(`*${kruthi}*`)	    
+//if (!m.isGroup) return replay(`*${kruthi}*`)	    
         //member\\
         let picaks = [flaming,fluming,flarun,flasmurf]
 		let picak = picaks[Math.floor(Math.random() * picaks.length)]
@@ -1318,71 +1319,7 @@ https://chat.whatsapp.com/FDpARRbNUKjLkfbm2xRv2M
     headerType: 4,
     }
     PRAMESH.sendMessage(m.chat, buttonMessage, { quoted: m })
-    }
-            break
-case 'vd': case 'serchsong' { 
-PRAMESH.sendMessage(from, { react: { text: `🔎`, key: m.key }})
-if (!text) return m.reply(`Example : ${prefix + command} Stay jb`)
-            let ytsvideo = require("youtube-yts")
-            let videosearch = await ytsvideo(text)
-            listSerch = []
-            teskd = `\nSearched Video: ${text}\n`
-            for (let i of videosearch.all) {
-                listSerch.push({
-                    title: i.title,
-                    rowId: `${prefix}ytmp4 ${i.url}`,
-                    description: `Duration: ${i.timestamp}`=
-                })
-            }
-            let sections = [
-                {
-                    title: "Top " + videosearch.all.length + " videos thats matches search result",
-                    rows: listSerch
-                }
-            ]
-            const listMessage = {
-                text: teskd,
-                footer: botname,
-                title: ``,
-                buttonText: "Videos",
-                mentions: parseMention(teskd), sections
-            }
-            return PRAMESH.sendMessage(m.chat, listMessage, {
-                quoted: m
-            })
-            }
-        break    
-        case 'sg': case 'serchsong': {
-PRAMESH.sendMessage(from, { react: { text: `🔎`, key: m.key }})
-        if (!text) return m.reply(`Example : ${prefix + command} stay jb`)
-            let ytslagu = require("youtube-yts")
-            let lagusearch = await ytslagu(text)
-            listSerch = []
-            teskd = `Searched Song: ${text}\n`
-            for (let i of lagusearch.all) {
-                listSerch.push({
-                    title: i.title,
-                    rowId: `${prefix}ytmp3 ${i.url}`,
-                    description: `Duration: ${i.timestamp}`
-                })
-            }
-            const sections = [
-                {
-                    title: "Top " + lagusearch.all.length + " songs that matched search result",
-                    rows: listSerch
-                }
-            ]
-            const listMessage = {
-                text: teskd,
-                footer: botname,
-                title: ``,
-                buttonText: "Songs",
-                mentions: parseMention(teskd), sections
-            }
-            return PRAMESH.sendMessage(m.chat, listMessage, {
-                quoted: m
-            })
-            }
+    }        
             break
 case 'song': case 'yt': case 'play': {
          if (!text) return reply(`Example : ${prefix + command} lelena`)
@@ -1472,13 +1409,13 @@ PRAMESH.sendMessage(from, { react: { text: `🎶`, key: m.key }})
     await PRAMESH.sendMessage(from, { delete: audup.key })              
                      }
                  break
-  case 'love': {
-            const somtoy = solot[Math.floor(Math.random() * solot.length)]
-            let sloth =`*හායි*\n *ඔයාගෙ girlfriend ඔයාට කොච්චර ආදරෙයිද කියල බලමුද*`
-           let buttons = [{ buttonId: 'slot', buttonText: { displayText: '💔නැවත බැලීම💔' }, type: 1 }]
-            await PRAMESH.sendButtonText(m.chat, buttons, sloth, botname, m)
-            }
-            break
+//  case 'love': {
+//            const somtoy = solot[Math.floor(Math.random() * solot.length)]
+    //        let sloth =`*හායි*\n *ඔයාගෙ girlfriend ඔයාට කොච්චර ආදරෙයිද කියල බලමුද*`
+//           let buttons = [{ buttonId: 'slot', buttonText: { displayText: '💔නැවත බැලීම💔' }, type: 1 }]
+//            await PRAMESH.sendButtonText(m.chat, buttons, sloth, botname, m)
+//            }
+//            break
   //chat bot\\
             case 'ba': case 'බැ': case 'බෑ': case 'බැහැ': {
 PRAMESH.sendMessage(from, { react: { text: `😒`, key: m.key }})
